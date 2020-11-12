@@ -9,9 +9,11 @@ public class WaveSpawner : MonoBehaviour
     //Wave Timer
     public float timeBetweenWaves = 10;
     float waveTimer;
-
-    //Wave
-    public Wave wave;
+    
+    //Waves
+    public Wave[] waves;
+    int currentWave = 0;
+ 
 
     void Start()
     {
@@ -24,9 +26,9 @@ public class WaveSpawner : MonoBehaviour
         //Spawn Wave after Timer reaches zero
         if(waveTimer <= 0)
         {
-            //Spawn the wave
+            //Spawn the wave and reset time
             spawnWave();
-            waveTimer = timeBetweenWaves;
+            resetTimer();
         }
         //If Wave Timer is above zero take away time
         else if (waveTimer > 0)
@@ -38,13 +40,29 @@ public class WaveSpawner : MonoBehaviour
 
     void spawnWave()
     {
-        //Spawn the GameObject inside the Wave
-        spawnGameObject(wave.gameObject);
+        //Check current wave isnt the last
+        if(currentWave < waves.Length)
+        {
+            //Spawn Wave
+            spawnGameObject(waves[currentWave].gameObject);
+            //Increase Current Wave
+            currentWave++;
+        }
+        else
+        {
+            //Finished Spawning
+        }
     }
 
     void spawnGameObject(GameObject gameObject)
     {
         //instantiate the gameObject
         Instantiate(gameObject);
+    }
+
+    void resetTimer()
+    {
+        //Reset Timer
+        waveTimer = timeBetweenWaves;
     }
 }
