@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6106511ff47b46e4f87025a15f73552e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenWaves: 5
+  timeBetweenWaves: 2
   wave:
     waveName: 
     gameObject: {fileID: 1038030180340483726, guid: 1b4697b1374c943488e4b9a4bc2ed3bb,
