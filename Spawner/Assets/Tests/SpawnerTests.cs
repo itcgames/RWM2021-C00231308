@@ -69,5 +69,23 @@ namespace Tests
             //Check the types are the same
             Assert.True(GameObject.Find("pepelaugh(Clone)").GetType() == gameObjType.GetType());
         }
+
+        //Check Timer Is Spawning Correctly
+        [UnityTest]
+        public IEnumerator amountSpawnedTest()
+        {
+            //Wait two more seconds (Spawn Should now have happened)
+            yield return new WaitForSeconds(3);
+
+            //Set found to false
+            bool threeFound = false;
+            //Get the length of each gameoject spawned with our tag
+            if (GameObject.FindGameObjectsWithTag("PepeLaugh").Length == 3)
+            {
+                //if three has been found set the bool to true
+                threeFound = true;
+            }
+            Assert.True(threeFound);
+        }
     }
 }

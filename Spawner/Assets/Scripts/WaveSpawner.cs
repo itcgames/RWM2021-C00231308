@@ -43,8 +43,12 @@ public class WaveSpawner : MonoBehaviour
         //Check current wave isnt the last
         if(currentWave < waves.Length)
         {
-            //Spawn Wave
-            spawnGameObject(waves[currentWave].gameObject);
+            //Spawn Amount of objects that are in the current Wave
+            for (int i = 0; i < waves[currentWave].amountOfObjects; i++ )
+            {
+                spawnGameObject(waves[currentWave].gameObject);
+            }
+
             //Increase Current Wave
             currentWave++;
         }
