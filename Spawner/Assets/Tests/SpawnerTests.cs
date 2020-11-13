@@ -24,13 +24,17 @@ namespace Tests
         [TearDown]
         public void Teardown()
         {
-            //Destroy the Spawner
-            Object.Destroy(game);
+            //Destroy All Objects in the scene
+            foreach (GameObject o in Object.FindObjectsOfType<GameObject>())
+            {
+                Object.Destroy(o);
+            }
             //Unload the Scene on Completion
             SceneManager.UnloadSceneAsync("Demo");
         }
 
 
+        //Check Timer Is Spawning Correctly
         [UnityTest]
         public IEnumerator spawnTimerTest()
         {
@@ -42,6 +46,7 @@ namespace Tests
             Assert.True(GameObject.Find("pepelaugh(Clone)"));
         }
 
+        //Check Ammount of waves are Spawning Correctly
         [UnityTest]
         public IEnumerator waveNumberTest()
         {
@@ -51,6 +56,18 @@ namespace Tests
             //Second Wave Check
             yield return new WaitForSeconds(3);
             Assert.True(GameObject.Find("sadge(Clone)"));
+        }
+
+        //Check Game Object Type
+        [UnityTest]
+        public IEnumerator gameObjectTest()
+        {
+            //Make Gameobject Type
+            GameObject gameObjType = new GameObject();
+            //Wait till gameobject spawns
+            yield return new WaitForSeconds(3);
+            //Check the types are the same
+            Assert.True(GameObject.Find("pepelaugh(Clone)").GetType() == gameObjType.GetType());
         }
     }
 }
