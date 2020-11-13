@@ -12,4 +12,7 @@ public class Wave
     //Game Object to be Spawned
     public GameObject gameObject;
 
+    //Amount of Objects in the Wave
+    public int amountOfObjects = 1;
+
 }

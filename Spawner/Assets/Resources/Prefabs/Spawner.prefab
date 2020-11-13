@@ -48,6 +48,8 @@ MonoBehaviour:
   - waveName: TestWave
     gameObject: {fileID: 1038030180340483726, guid: 1b4697b1374c943488e4b9a4bc2ed3bb,
       type: 3}
+    amountOfObjects: 3
   - waveName: TestWave
     gameObject: {fileID: 4004133875349794043, guid: 1a1a0d56d87b2ad4c8434f5f92f30051,
       type: 3}
+    amountOfObjects: 1
