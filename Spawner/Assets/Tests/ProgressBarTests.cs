@@ -11,6 +11,7 @@ namespace Tests
     {
         //private WaveSpawner waveSpawner;
         public GameObject game;
+        public WaveSpawner ws;
 
         [SetUp]
         public void Setup()
@@ -18,7 +19,8 @@ namespace Tests
             //Load Demo Scene
             SceneManager.LoadScene("Demo", LoadSceneMode.Additive);
             //Create Spawner in the Scene
-            game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+            //game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+            ws = MonoBehaviour.Instantiate(Resources.Load<WaveSpawner>("Prefabs/Spawner"));
         }
 
         [TearDown]
@@ -36,7 +38,7 @@ namespace Tests
 
         //Check Progress Bar is spawning correctly
         [UnityTest]
-        public IEnumerator spawnProgressBar()
+        public IEnumerator spawnProgressBarTest()
         {
             //Wait one second for game object to instantiate
             yield return new WaitForSeconds(1);
@@ -46,5 +48,36 @@ namespace Tests
             Assert.True(GameObject.Find("Boarder"));
             Assert.True(GameObject.Find("WaveProgress"));
         }
+
+        
+        [UnityTest]
+        public IEnumerator barFillingTest()
+        {
+            //Create Progress bar varible
+            ProgressBar pb;
+            //Assign progress bar from wave spawner
+            pb = ws.pb;
+            //Make sure progress bar is not null
+            if (pb != null)
+            {
+                //Check its starting Value is 0
+                Assert.True(pb.slider.value == 0);
+
+                //Wait one second for game object to instantiate
+                yield return new WaitForSeconds(2);
+
+                //Check progress value has increased
+                if (pb.slider.value > 0)
+                {
+                    Assert.Pass();
+                }
+            }
+            else
+            {
+                //Fail if not found
+                Assert.Fail();
+            }
+        }
+        
     }
 }

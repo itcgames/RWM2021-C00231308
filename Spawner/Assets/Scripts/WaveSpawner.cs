@@ -13,12 +13,27 @@ public class WaveSpawner : MonoBehaviour
     //Waves
     public Wave[] waves;
     int currentWave = 0;
- 
+
+    //Progress Bar
+    //public ProgressBar progressBar;
+    public ProgressBar pb;
+    private float totalTime;
+    float oneSecondAsPercentage;
 
     void Start()
     {
         //Timer Begins at time between waves
         waveTimer = timeBetweenWaves;
+
+        //Get total Time
+        totalTime = waves.Length * timeBetweenWaves;
+
+        //Get one second as a Percentage
+         oneSecondAsPercentage = 100 / totalTime;
+
+        //Update Progress Bar
+        StartCoroutine(updateProgressBar());
+
     }
 
     void Update()
@@ -36,6 +51,8 @@ public class WaveSpawner : MonoBehaviour
             //Take away deltaTime to countdown Wave Timer
             waveTimer -= Time.deltaTime;
         }
+
+
     }
 
     void spawnWave()
@@ -68,5 +85,16 @@ public class WaveSpawner : MonoBehaviour
     {
         //Reset Timer
         waveTimer = timeBetweenWaves;
+    }
+
+    IEnumerator updateProgressBar()
+    {
+        while(true)
+        {
+            //Update the bar every second
+            yield return new WaitForSeconds(1f);
+            //progressBar.increaseProgress(oneSecondAsPercentage);
+            pb.increaseProgress(oneSecondAsPercentage);
+        }
     }
 }
