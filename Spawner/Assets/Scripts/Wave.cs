@@ -15,4 +15,7 @@ public class Wave
     //Amount of Objects in the Wave
     public int amountOfObjects = 1;
 
+    //Heavy Wave Check
+    public bool heavyWave;
+
 }
