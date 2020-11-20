@@ -18,7 +18,7 @@ namespace Tests
             //Load Demo Scene
             SceneManager.LoadScene("Demo", LoadSceneMode.Additive);
             //Create Spawner in the Scene
-            game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+            //game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
         }
 
         [TearDown]

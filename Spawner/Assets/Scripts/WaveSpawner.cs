@@ -13,12 +13,56 @@ public class WaveSpawner : MonoBehaviour
     //Waves
     public Wave[] waves;
     int currentWave = 0;
- 
+
+    //Progress Bar
+    //public ProgressBar progressBar;
+    public ProgressBar pb;
+    private float totalTime;
+    float oneSecondAsPercentage;
+
+    //Heavy Spawn indicator Varibles
+    float widthProgressBar;
+    float heightProgressBar;
+
+
 
     void Start()
     {
         //Timer Begins at time between waves
         waveTimer = timeBetweenWaves;
+
+        //Get total Time
+        totalTime = waves.Length * timeBetweenWaves;
+
+        //Get one second as a Percentage
+         oneSecondAsPercentage = 100 / totalTime;
+
+        //Assign width of progress bar
+        widthProgressBar = pb.transform.GetComponent<RectTransform>().sizeDelta.x;
+        //Assign Height of progress bar
+        heightProgressBar = pb.transform.GetComponent<RectTransform>().sizeDelta.y;
+
+        for(int i = 0; i < waves.Length; i++ )
+        {
+            if(waves[i].heavyWave)
+            {
+                float xPos = (widthProgressBar / waves.Length) * i + (pb.transform.position.x - (widthProgressBar / 2));
+                float yPos = pb.transform.position.y + (heightProgressBar);
+               // float xPos = (widthProgressBar / (timeBetweenWaves )* i) + (pb.transform.position.x - (widthProgressBar/2));
+                //float yPos = (heightProgressBar) + (pb.transform.position.y - (heightProgressBar/2));
+
+                //float yPos = 1000;
+                //float xPos = 0;
+
+                pb.placeHeavyWaveMarker(xPos, yPos);
+
+            }
+        }
+
+
+        //Update Progress Bar
+        StartCoroutine(updateProgressBar());
+
     }
 
     void Update()
@@ -36,6 +80,8 @@ public class WaveSpawner : MonoBehaviour
             //Take away deltaTime to countdown Wave Timer
             waveTimer -= Time.deltaTime;
         }
+
+
     }
 
     void spawnWave()
@@ -68,5 +114,16 @@ public class WaveSpawner : MonoBehaviour
     {
         //Reset Timer
         waveTimer = timeBetweenWaves;
+    }
+
+    IEnumerator updateProgressBar()
+    {
+        while(true)
+        {
+            //Update the bar every second
+            yield return new WaitForSeconds(1f);
+            //progressBar.increaseProgress(oneSecondAsPercentage);
+            pb.increaseProgress(oneSecondAsPercentage);
+        }
     }
 }
