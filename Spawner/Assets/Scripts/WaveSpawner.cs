@@ -20,6 +20,12 @@ public class WaveSpawner : MonoBehaviour
     private float totalTime;
     float oneSecondAsPercentage;
 
+    //Heavy Spawn indicator Varibles
+    float widthProgressBar;
+    float heightProgressBar;
+
+
+
     void Start()
     {
         //Timer Begins at time between waves
@@ -30,6 +36,29 @@ public class WaveSpawner : MonoBehaviour
 
         //Get one second as a Percentage
          oneSecondAsPercentage = 100 / totalTime;
+
+        //Assign width of progress bar
+        widthProgressBar = pb.transform.GetComponent<RectTransform>().sizeDelta.x;
+        //Assign Height of progress bar
+        heightProgressBar = pb.transform.GetComponent<RectTransform>().sizeDelta.y;
+
+        for(int i = 0; i < waves.Length; i++ )
+        {
+            if(waves[i].heavyWave)
+            {
+                float xPos = (widthProgressBar / waves.Length) * i + (pb.transform.position.x - (widthProgressBar / 2));
+                float yPos = pb.transform.position.y + (heightProgressBar);
+               // float xPos = (widthProgressBar / (timeBetweenWaves )* i) + (pb.transform.position.x - (widthProgressBar/2));
+                //float yPos = (heightProgressBar) + (pb.transform.position.y - (heightProgressBar/2));
+
+                //float yPos = 1000;
+                //float xPos = 0;
+
+                pb.placeHeavyWaveMarker(xPos, yPos);
+
+            }
+        }
+
 
         //Update Progress Bar
         StartCoroutine(updateProgressBar());

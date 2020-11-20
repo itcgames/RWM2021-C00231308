@@ -78,6 +78,19 @@ namespace Tests
                 Assert.Fail();
             }
         }
-        
+
+
+        [UnityTest]
+        public IEnumerator heavyWaveSpawningIcon()
+        {
+            yield return new WaitForSeconds(1);
+
+            //Get Game Object with pointer tag
+            GameObject heavyWavePointer = GameObject.FindGameObjectWithTag("Pointer");
+
+            //Check for Pointer Spawned
+            Assert.True(heavyWavePointer != null);
+
+        }
     }
 }
