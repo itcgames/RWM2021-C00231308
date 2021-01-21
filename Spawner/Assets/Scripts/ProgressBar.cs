@@ -24,10 +24,9 @@ public class ProgressBar : MonoBehaviour
     public void placeHeavyWaveMarker(float xPos, float yPos)
     {
 
-        Vector3 MoveVec = new Vector3(xPos, yPos, 0);
-        Instantiate(Pointer, transform, true);
+        RectTransform flag = Instantiate(Pointer, transform);
 
-        Pointer.transform.position = new Vector3(xPos, yPos, 1);
+        flag.transform.position += new Vector3(xPos, yPos, 0);
     }
 
 }

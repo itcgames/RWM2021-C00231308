@@ -14,6 +14,10 @@ public class WaveSpawner : MonoBehaviour
     public Wave[] waves;
     int currentWave = 0;
 
+    //Poisitions
+    public Vector3[] spawnPositions;
+    int currentSpawnPos = 0;
+
     //Progress Bar
     //public ProgressBar progressBar;
     public ProgressBar pb;
@@ -46,15 +50,17 @@ public class WaveSpawner : MonoBehaviour
         {
             if(waves[i].heavyWave)
             {
-                float xPos = (widthProgressBar / waves.Length) * i + (pb.transform.position.x - (widthProgressBar / 2));
-                float yPos = pb.transform.position.y + (heightProgressBar);
-               // float xPos = (widthProgressBar / (timeBetweenWaves )* i) + (pb.transform.position.x - (widthProgressBar/2));
-                //float yPos = (heightProgressBar) + (pb.transform.position.y - (heightProgressBar/2));
+               //float xPos = (widthProgressBar / waves.Length) * i + (pb.transform.position.x - (widthProgressBar / 2));
+               //float yPos = pb.transform.position.y + (heightProgressBar);
+               //// float xPos = (widthProgressBar / (timeBetweenWaves )* i) + (pb.transform.position.x - (widthProgressBar/2));
+               // //float yPos = (heightProgressBar) + (pb.transform.position.y - (heightProgressBar/2));
 
-                //float yPos = 1000;
-                //float xPos = 0;
+               // //float yPos = 1000;
+               // //float xPos = 0;
+                float xPos = -((widthProgressBar / waves.Length) * (i + 1)) ;// (pb.transform.position.x + (-widthProgressBar / 2));
+                float yPos = (heightProgressBar) + heightProgressBar/2;
 
-                pb.placeHeavyWaveMarker(xPos, yPos);
+               pb.placeHeavyWaveMarker(xPos, yPos);
 
             }
         }
@@ -106,8 +112,17 @@ public class WaveSpawner : MonoBehaviour
 
     void spawnGameObject(GameObject gameObject)
     {
+        if (currentSpawnPos < spawnPositions.Length - 1)
+        {
+            currentSpawnPos++;
+        }
+        else
+        {
+            currentSpawnPos = 0;
+        }
+
         //instantiate the gameObject
-        Instantiate(gameObject);
+        Instantiate(gameObject, spawnPositions[currentSpawnPos], Quaternion.identity);
     }
 
     void resetTimer()
