@@ -55,8 +55,6 @@ namespace Tests
                     positionCorrect = true;
                 }  
             }
-
-
             Assert.True(positionCorrect);
         }
     }

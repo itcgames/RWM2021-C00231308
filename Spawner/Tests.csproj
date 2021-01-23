@@ -66,8 +66,10 @@
   <ItemGroup>
     <Compile Include="Assets\Tests\EndlessSpawnerTests.cs" />
     <Compile Include="Assets\Tests\ProgressBarTests.cs" />
+    <Compile Include="Assets\Tests\ScoreboardTests.cs" />
     <Compile Include="Assets\Tests\SpawnPositionTests.cs" />
     <Compile Include="Assets\Tests\SpawnerTests.cs" />
+    <Compile Include="Assets\Tests\TimerTests.cs" />
     <None Include="Assets\Tests\Tests.asmdef" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.17f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
