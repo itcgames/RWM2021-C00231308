@@ -17,7 +17,7 @@ namespace Tests
         public void Setup()
         {
             //Load Demo Scene
-            SceneManager.LoadScene("Demo", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Spawner", LoadSceneMode.Additive);
             //Create Spawner in the Scene
             //game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
             ws = MonoBehaviour.Instantiate(Resources.Load<WaveSpawner>("Prefabs/Spawner"));
@@ -32,7 +32,7 @@ namespace Tests
                 Object.Destroy(o);
             }
             //Unload the Scene on Completion
-            SceneManager.UnloadSceneAsync("Demo");
+            SceneManager.UnloadSceneAsync("Spawner");
         }
 
 

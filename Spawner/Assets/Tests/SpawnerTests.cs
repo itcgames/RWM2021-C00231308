@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Tests
 {
-    public class SpawnTests
+    public class EndlessSpawnerTests
     {
         //private WaveSpawner waveSpawner;
         public GameObject game;
@@ -16,9 +16,7 @@ namespace Tests
         public void Setup()
         {
             //Load Demo Scene
-            SceneManager.LoadScene("Demo", LoadSceneMode.Additive);
-            //Create Spawner in the Scene
-            //game = MonoBehaviour.Instantiate(Resources.Load<GameObject>("Prefabs/Game"));
+            SceneManager.LoadScene("EndlessSpawner", LoadSceneMode.Additive);
         }
 
         [TearDown]
@@ -30,33 +28,43 @@ namespace Tests
                 Object.Destroy(o);
             }
             //Unload the Scene on Completion
-            SceneManager.UnloadSceneAsync("Demo");
+            SceneManager.UnloadSceneAsync("EndlessSpawner");
         }
 
 
-        //Check Timer Is Spawning Correctly
         [UnityTest]
-        public IEnumerator spawnTimerTest()
+        public IEnumerator initalSpawnTimerTest()
         {
-            //Wait one second (First spawn on 2 seconds so assert should return false)
-            yield return new WaitForSeconds(1);
+            //Wait four second (First spawn on 5 seconds so assert should return false)
+            yield return new WaitForSeconds(4);
+            //Assert Neither gameobject has been found
             Assert.False(GameObject.Find("pepelaugh(Clone)"));
-            //Wait two more seconds (Spawn Should now have happened)
+            Assert.False(GameObject.Find("sadge(Clone)"));
+
             yield return new WaitForSeconds(2);
-            Assert.True(GameObject.Find("pepelaugh(Clone)"));
+
+            //Wait two more seconds (Spawn Should now have happened)
+            bool spawnHappened = false;
+            if (GameObject.Find("pepelaugh(Clone)") || GameObject.Find("sadge(Clone)"))
+            {
+                spawnHappened = true;
+            }
+            else
+            {
+                //Remain False
+            }
+
+            if (spawnHappened)
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
         }
 
-        //Check Ammount of waves are Spawning Correctly
-        [UnityTest]
-        public IEnumerator waveNumberTest()
-        {
-            //First Wave Check
-            yield return new WaitForSeconds(3);
-            Assert.True(GameObject.Find("pepelaugh(Clone)"));
-            //Second Wave Check
-            yield return new WaitForSeconds(3);
-            Assert.True(GameObject.Find("sadge(Clone)"));
-        }
+
 
         //Check Game Object Type
         [UnityTest]
@@ -65,27 +73,21 @@ namespace Tests
             //Make Gameobject Type
             GameObject gameObjType = new GameObject();
             //Wait till gameobject spawns
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(6);
             //Check the types are the same
-            Assert.True(GameObject.Find("pepelaugh(Clone)").GetType() == gameObjType.GetType());
-        }
-
-        //Check Timer Is Spawning Correctly
-        [UnityTest]
-        public IEnumerator amountSpawnedTest()
-        {
-            //Wait two more seconds (Spawn Should now have happened)
-            yield return new WaitForSeconds(3);
-
-            //Set found to false
-            bool threeFound = false;
-            //Get the length of each gameoject spawned with our tag
-            if (GameObject.FindGameObjectsWithTag("PepeLaugh").Length == 3)
+            if (GameObject.Find("pepelaugh(Clone)"))
             {
-                //if three has been found set the bool to true
-                threeFound = true;
+                Assert.True(GameObject.Find("pepelaugh(Clone)").GetType() == gameObjType.GetType());
             }
-            Assert.True(threeFound);
+            else if (GameObject.Find("sadge(Clone)"))
+            {
+                Assert.True(GameObject.Find("sadge(Clone)").GetType() == gameObjType.GetType());
+            }
+            else
+            {
+                //Remain False
+                Assert.Fail();
+            }           
         }
     }
 }
