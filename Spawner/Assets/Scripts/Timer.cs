@@ -6,6 +6,8 @@ using System;
 
 public class Timer : MonoBehaviour
 {
+    public bool turnOn = true;
+
     public static Timer timer;
     public Text timeText;
     private TimeSpan timePlaying;
@@ -17,10 +19,17 @@ public class Timer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeText.text = "Time: 00:00:00";
-        timeBegan = false;
-
-        startTimer();
+        if(turnOn)
+        {
+            this.gameObject.SetActive(true);
+            timeText.text = "Time: 00:00:00";
+            timeBegan = false;
+            startTimer();
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void startTimer()

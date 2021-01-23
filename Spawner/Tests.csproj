@@ -64,7 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Tests\EndlessSpawnerTests.cs" />
     <Compile Include="Assets\Tests\ProgressBarTests.cs" />
+    <Compile Include="Assets\Tests\SpawnPositionTests.cs" />
     <Compile Include="Assets\Tests\SpawnerTests.cs" />
     <None Include="Assets\Tests\Tests.asmdef" />
     <Reference Include="UnityEngine">

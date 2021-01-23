@@ -10,7 +10,7 @@ public class EndlessWaveSpawner : MonoBehaviour
 
     //Wave Timer
     float initialTimer = 0;
-    float initialSetUpTime = 2;
+    public float initialSetUpTime = 5;
 
     public float timeBetweenWaves;
     float waveTimer;
