@@ -13,7 +13,7 @@ public class Timer : MonoBehaviour
     private TimeSpan timePlaying;
     bool timeBegan = false;
 
-    private float elapsedTime;
+    public float elapsedTime;
 
 
     // Start is called before the first frame update

@@ -38,11 +38,11 @@ public class ScoreBoard : MonoBehaviour
         //Fill list with default values
         scoreboardListInfo = new List<ScoreBoardInfo>()
         {
-            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = 70 },
-            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = 70 },
-            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = 70 },
-            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = 70 },
-            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = 70 },
+            new ScoreBoardInfo { name = "Tom", time = Random.Range(0,1000), enemiesKilled = Random.Range(0,50) },
+            new ScoreBoardInfo { name = "Joe", time = Random.Range(0,1000), enemiesKilled = Random.Range(0,50) },
+            new ScoreBoardInfo { name = "Shaun", time = Random.Range(0,1000), enemiesKilled = Random.Range(0,50) },
+            new ScoreBoardInfo { name = "Robbin", time = Random.Range(0,1000), enemiesKilled = Random.Range(0,50) },
+            new ScoreBoardInfo { name = "Peter", time = Random.Range(0,1000), enemiesKilled = Random.Range(0,50) },
         };
 
 
@@ -50,22 +50,12 @@ public class ScoreBoard : MonoBehaviour
         scoreboardListTransform = new List<Transform>();
 
         ScoreBoardInfo newScore;
-        newScore.name = "JAMES";
-        newScore.time = 100000;
-        newScore.enemiesKilled = 30;
+        newScore.name = "You";
+        newScore.time = Random.Range(0, 1000);
+        newScore.enemiesKilled = Random.Range(0, 50);
 
+        //Enter Players score
         playerEntry(newScore);
-
-        
-
-        /*
-        foreach (ScoreBoardInfo scoreboardEntry in scoreboardListInfo)
-        {
-            highScoreEntry(scoreboardEntry, transformContainer, scoreboardListTransform);
-        }
-        */
-
-
     }
 
     private void highScoreEntry(ScoreBoardInfo scoreBoardInfo, Transform container, List<Transform> transforms )
@@ -93,7 +83,9 @@ public class ScoreBoard : MonoBehaviour
                 if (scoreboardListInfo[j].time > scoreboardListInfo[i].time)
                 {
                     //Swap the placements
+                    //Temp to hold the info while it is changed over
                     ScoreBoardInfo tempHolder = scoreboardListInfo[i];
+                    //Swaping list info palces
                     scoreboardListInfo[i] = scoreboardListInfo[j];
                     scoreboardListInfo[j] = tempHolder;
                 }
@@ -103,29 +95,17 @@ public class ScoreBoard : MonoBehaviour
 
     public void playerEntry(ScoreBoardInfo playersInfo)
     {
+        //Add the players info to the list
         scoreboardListInfo.Add(playersInfo);
 
+        //sort the list relative to Time (Longer is better) 
         sortListByTime();
         
-
-        foreach (ScoreBoardInfo scoreboardEntry in scoreboardListInfo)
+        //Create an entry for each of the scores info in the list depending on max entrys
+        for(int i = 0; i < maxEntrys; i++)
         {
-            highScoreEntry(scoreboardEntry, transformContainer, scoreboardListTransform);
+            highScoreEntry(scoreboardListInfo[i], transformContainer, scoreboardListTransform);
         }
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //scoreBoardList = new List<ScoreBoardInfo>();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
 
     }
 }
